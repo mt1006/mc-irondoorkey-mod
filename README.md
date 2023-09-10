@@ -1,5 +1,5 @@
 # About
-**Iron Door Key** is a Minecraft mod adding as name suggests iron door key, which can be used to open iron doors and trapdoors.
+**Iron Door Key** is a Minecraft mod adding as its name suggests iron door key. It can be used to open iron doors and trapdoors.
 
 # Crafting recipe
 
