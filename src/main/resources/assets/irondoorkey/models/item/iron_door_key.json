@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures":
+  {
+    "layer0": "irondoorkey:item/iron_door_key"
+  },
+  "display":
+  {
+    "firstperson_righthand":
+    {
+      "translation": [ 4, 0, -6 ],
+      "rotation": [ -30, 90, 0 ]
+    },
+    "firstperson_lefthand":
+    {
+      "translation": [ 4, 0, -6 ],
+      "rotation": [ -30, -90, 0 ]
+    }
+  }
+}
