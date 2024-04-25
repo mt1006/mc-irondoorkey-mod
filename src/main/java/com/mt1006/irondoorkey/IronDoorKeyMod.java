@@ -14,7 +14,7 @@ public class IronDoorKeyMod implements ModInitializer
 {
 	public static final String MOD_ID = "irondoorkey";
 	public static final String VERSION = "1.0";
-	public static final String FOR_VERSION = "1.20.4";
+	public static final String FOR_VERSION = "1.20.5";
 	public static final String FOR_LOADER = "Fabric";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -22,7 +22,7 @@ public class IronDoorKeyMod implements ModInitializer
 
 	@Override public void onInitialize()
 	{
-		LOGGER.info(getFullName() + " - Author: mt1006 (mt1006x)");
+		LOGGER.info("{} - Author: mt1006 (mt1006x)", getFullName());
 		Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(MOD_ID, "iron_door_key"), ITEM_IRON_DOOR_KEY);
 
 		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)

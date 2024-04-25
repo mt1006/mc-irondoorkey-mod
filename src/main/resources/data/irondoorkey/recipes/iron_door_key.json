@@ -13,6 +13,7 @@
   ],
   "result":
   {
-    "item": "irondoorkey:iron_door_key"
+    "id": "irondoorkey:iron_door_key",
+    "count": 1
   }
 }
