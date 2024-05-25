@@ -1,46 +1,40 @@
 plugins
 {
+    id 'java-library'
 	id 'eclipse'
 	id 'idea'
-	id 'maven-publish'
-	id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+	id 'net.neoforged.gradle.userdev' version '7.0.133'
 }
 
 version = mod_version
 group = mod_group_id
 
+repositories { mavenLocal() }
 base
 {
-	archivesName = "${mod_jar_name}-FORGE-${minecraft_version}"
+	archivesName = "${mod_jar_name}-NEOFORGE-${minecraft_version}"
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft
+runs
 {
-	mappings channel: mapping_channel, version: mapping_version
-	copyIdeResources = true
-
-	runs
+	configureEach
 	{
-		configureEach
-		{
-			workingDirectory project.file('run')
-			property 'forge.logging.markers', 'REGISTRIES'
-			property 'forge.logging.console.level', 'debug'
-		}
-
-		client { property 'forge.enabledGameTestNamespaces', mod_id }
-		server { property 'forge.enabledGameTestNamespaces', mod_id }
+		systemProperty 'forge.logging.markers', 'REGISTRIES'
+		systemProperty 'forge.logging.console.level', 'debug'
+		modSource project.sourceSets.main
 	}
+
+	client { systemProperty 'forge.enabledGameTestNamespaces', project.mod_id }
+	server { systemProperty 'forge.enabledGameTestNamespaces', project.mod_id }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies
 {
-	minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+	implementation "net.neoforged:neoforge:${neoforge_version}"
 }
 
 tasks.named('processResources', ProcessResources).configure
@@ -48,7 +42,7 @@ tasks.named('processResources', ProcessResources).configure
 	var replaceProperties =
 	[
 		minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
-		forge_version: forge_version, forge_version_range: forge_version_range,
+		neoforge_version: neoforge_version, neoforge_version_range: neoforge_version_range,
 		loader_version_range: loader_version_range,
 		mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
 		mod_authors: mod_authors, mod_description: mod_description,
@@ -56,33 +50,16 @@ tasks.named('processResources', ProcessResources).configure
 	]
 	inputs.properties replaceProperties
 
-	filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) { expand replaceProperties + [project: project] }
-}
-
-tasks.named('jar', Jar).configure
-{
-	manifest
-	{
-		attributes([
-				'Specification-Title'     : mod_id,
-				'Specification-Vendor'    : mod_authors,
-				'Specification-Version'   : '1',
-				'Implementation-Title'    : project.name,
-				'Implementation-Version'  : project.jar.archiveVersion,
-				'Implementation-Vendor'   : mod_authors
-		])
-	}
-
-	finalizedBy 'reobfJar'
+	filesMatching(['META-INF/neoforge.mods.toml']) { expand replaceProperties }
 }
 
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 
-eclipse { synchronizationTasks 'genEclipseRuns' }
-
-sourceSets.each
+idea
 {
-	def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
-	it.output.resourcesDir = dir
-	it.java.destinationDirectory = dir
+	module
+	{
+		downloadSources = true
+		downloadJavadoc = true
+	}
 }

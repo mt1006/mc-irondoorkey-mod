@@ -1,12 +1,12 @@
 package com.mt1006.irondoorkey;
 
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
-@Mod.EventBusSubscriber(modid = IronDoorKeyMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = IronDoorKeyMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents
 {
 	@SubscribeEvent
@@ -14,7 +14,7 @@ public class ClientEvents
 	{
 		if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES))
 		{
-			event.accept(IronDoorKeyMod.ITEM_IRON_DOOR_KEY);
+			event.accept(IronDoorKeyMod.ITEM_IRON_DOOR_KEY.get());
 		}
 	}
 }
