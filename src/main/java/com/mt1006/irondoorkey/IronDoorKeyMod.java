@@ -18,13 +18,13 @@ public class IronDoorKeyMod
 {
 	public static final String MOD_ID = "irondoorkey";
 	public static final String VERSION = "1.1";
-	public static final String FOR_VERSION = "1.20.6";
+	public static final String FOR_VERSION = "1.21";
 	public static final String FOR_LOADER = "NeoForge";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, MOD_ID);
 	public static final DeferredHolder<Item, IronDoorKeyItem> ITEM_IRON_DOOR_KEY = ITEMS.register("iron_door_key", IronDoorKeyItem::new);
-	public static final TagKey<Block> OPENABLE = TagKey.create(Registries.BLOCK, new ResourceLocation(MOD_ID, "openable"));
+	public static final TagKey<Block> OPENABLE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MOD_ID, "openable"));
 
 	public IronDoorKeyMod(IEventBus eventBus)
 	{
