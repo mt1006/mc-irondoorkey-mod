@@ -1,7 +1,6 @@
 plugins
 {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
-	id 'maven-publish'
+	id "fabric-loom" version "1.7-SNAPSHOT"
 }
 
 version = project.mod_version
@@ -14,7 +13,7 @@ base
 
 repositories
 {
-	maven { url = 'https://maven.parchmentmc.org/' }
+	maven { url = "https://maven.parchmentmc.org/" }
 }
 
 dependencies
@@ -44,9 +43,4 @@ java
 
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
-}
-
-jar
-{
-	from "LICENSE"
 }

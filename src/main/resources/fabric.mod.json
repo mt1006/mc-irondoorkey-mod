@@ -4,7 +4,7 @@
 	"version": "${version}",
 
 	"name": "Iron Door Key",
-	"description": "Adds iron door key",
+	"description": "Adds iron door key. It can be used to open iron doors and trapdoors.",
 	"authors": ["mt1006"],
 	"contact":
 	{

@@ -54,7 +54,7 @@ public class IronDoorKeyItem extends Item
 		}
 
 		IronDoorKeyMod.LOGGER.warn("Failed to open the block - " +
-				"it has \"openable\" tag, but isn't instance of DoorBlock or TrapDoorBlock");
+				"it has \"openable\" tag, but isn't instance of DoorBlock, TrapDoorBlock or FenceGateBlock");
 		return InteractionResult.PASS;
 	}
 

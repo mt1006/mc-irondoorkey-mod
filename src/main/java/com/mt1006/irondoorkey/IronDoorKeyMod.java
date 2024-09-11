@@ -16,25 +16,14 @@ import org.slf4j.Logger;
 public class IronDoorKeyMod implements ModInitializer
 {
 	public static final String MOD_ID = "irondoorkey";
-	public static final String VERSION = "1.1";
-	public static final String FOR_VERSION = "1.21";
-	public static final String FOR_LOADER = "Fabric";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-	public static final Item ITEM_IRON_DOOR_KEY = new IronDoorKeyItem();
+	private static final Item ITEM_IRON_DOOR_KEY = new IronDoorKeyItem();
 	public static final TagKey<Block> OPENABLE = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(MOD_ID, "openable"));
 
 	@Override public void onInitialize()
 	{
-		LOGGER.info("{} - Author: mt1006", getFullName());
 		Registry.register(BuiltInRegistries.ITEM, ResourceLocation.fromNamespaceAndPath(MOD_ID, "iron_door_key"), ITEM_IRON_DOOR_KEY);
-
-		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
-				.register(content -> content.accept(ITEM_IRON_DOOR_KEY));
-	}
-
-	public static String getFullName()
-	{
-		return "IronDoorKey v" + VERSION + " for Minecraft " + FOR_VERSION + " [" + FOR_LOADER + "]";
+		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register((content) -> content.accept(ITEM_IRON_DOOR_KEY));
 	}
 }

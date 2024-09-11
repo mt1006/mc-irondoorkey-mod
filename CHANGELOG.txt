@@ -1,3 +1,8 @@
+===Version 1.1.1===
+-Version information is no longer sent to logs during startup.
+-Warning message for unopenable block being declared as openable now properly includes "FenceGateBlock" as class of blocks possible to open.
+-Improved mod description.
+
 ===Version 1.1===
 -Blocks openable with key are now defined using "#irondoorkey:openable" tag, therefore they can now be added by other mods or datapacks (thanks to Anonyku05 for suggestion).
 -Minor improvements.
