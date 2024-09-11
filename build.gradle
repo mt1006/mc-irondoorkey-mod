@@ -1,9 +1,9 @@
 plugins
 {
-	id 'eclipse'
-	id 'idea'
-	id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
-	id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+	id "eclipse"
+	id "idea"
+	id "net.minecraftforge.gradle" version "[6.0.16,6.2)"
+	id "org.parchmentmc.librarian.forgegradle" version "1.+"
 }
 
 version = mod_version
@@ -25,24 +25,22 @@ minecraft
 	{
 		configureEach
 		{
-			workingDirectory project.file('run')
-			property 'forge.logging.markers', 'REGISTRIES'
-			property 'forge.logging.console.level', 'debug'
+			workingDirectory project.file("run")
+			property "forge.logging.markers", "REGISTRIES"
+			property "forge.logging.console.level", "debug"
 		}
 
-		client { property 'forge.enabledGameTestNamespaces', mod_id }
-		server { property 'forge.enabledGameTestNamespaces', mod_id }
+		client { property "forge.enabledGameTestNamespaces", mod_id }
+		server { property "forge.enabledGameTestNamespaces", mod_id }
 	}
 }
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies
 {
 	minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 }
 
-tasks.named('processResources', ProcessResources).configure
+tasks.named("processResources", ProcessResources).configure
 {
 	var replaceProperties =
 	[
@@ -55,12 +53,12 @@ tasks.named('processResources', ProcessResources).configure
 	]
 	inputs.properties replaceProperties
 
-	filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) { expand replaceProperties + [project: project] }
+	filesMatching(["META-INF/mods.toml", "pack.mcmeta"]) { expand replaceProperties + [project: project] }
 }
 
-tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.withType(JavaCompile).configureEach { options.encoding = "UTF-8" }
 
-eclipse { synchronizationTasks 'genEclipseRuns' }
+eclipse { synchronizationTasks "genEclipseRuns" }
 
 sourceSets.each
 {
