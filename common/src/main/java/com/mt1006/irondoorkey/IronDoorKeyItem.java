@@ -1,6 +1,9 @@
 package com.mt1006.irondoorkey;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -24,12 +27,14 @@ import java.lang.reflect.Modifier;
 
 public class IronDoorKeyItem extends Item
 {
+	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(IronDoorKeyCommon.MOD_ID, "iron_door_key");
+
 	private static boolean fenceGateSoundUsed = false;
 	private static @Nullable Field fenceGateTypeField = null;
 
 	public IronDoorKeyItem()
 	{
-		super(new Item.Properties());
+		super(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ID)));
 	}
 
 	@Override public @NotNull InteractionResult useOn(@NotNull UseOnContext ctx)
@@ -45,18 +50,18 @@ public class IronDoorKeyItem extends Item
 		{
 			DoorBlock doorBlock = (DoorBlock)blockType;
 			doorBlock.setOpen(ctx.getPlayer(), level, blockState, blockPos, !doorBlock.isOpen(blockState));
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		}
 		else if (blockType instanceof TrapDoorBlock)
 		{
 			openTrapDoor(ctx.getPlayer(), level, blockPos, blockState);
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		}
 		else if (blockType instanceof FenceGateBlock)
 		{
 			// redundant in vanilla, added for better mod support, e.g. with SecurityCraft
 			openFenceGate(ctx.getPlayer(), level, blockPos, blockState, (FenceGateBlock)blockType);
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		}
 
 		IronDoorKeyCommon.LOGGER.warn("Failed to open the block - " +

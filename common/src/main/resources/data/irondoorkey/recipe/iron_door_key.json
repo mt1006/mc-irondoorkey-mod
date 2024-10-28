@@ -3,8 +3,8 @@
   "category": "equipment",
   "key":
   {
-    "#": { "item": "minecraft:iron_nugget" },
-    "*": { "item": "minecraft:redstone" }
+    "#": "minecraft:iron_nugget",
+    "*": "minecraft:redstone"
   },
   "pattern": [
     "#  ",
