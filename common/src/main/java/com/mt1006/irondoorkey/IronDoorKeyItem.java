@@ -1,7 +1,6 @@
 package com.mt1006.irondoorkey;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -14,13 +13,20 @@ import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
 public class IronDoorKeyItem extends Item
 {
+	private static boolean fenceGateSoundUsed = false;
+	private static @Nullable Field fenceGateTypeField = null;
+
 	public IronDoorKeyItem()
 	{
 		super(new Item.Properties());
@@ -32,7 +38,7 @@ public class IronDoorKeyItem extends Item
 		BlockPos blockPos = ctx.getClickedPos();
 		BlockState blockState = level.getBlockState(blockPos);
 
-		if (!blockState.is(IronDoorKeyMod.OPENABLE)) { return InteractionResult.PASS; }
+		if (!blockState.is(IronDoorKeyCommon.OPENABLE)) { return InteractionResult.PASS; }
 		Block blockType = blockState.getBlock();
 
 		if (blockType instanceof DoorBlock)
@@ -49,11 +55,11 @@ public class IronDoorKeyItem extends Item
 		else if (blockType instanceof FenceGateBlock)
 		{
 			// redundant in vanilla, added for better mod support, e.g. with SecurityCraft
-			openFenceGate(ctx.getPlayer(), level, blockPos, blockState);
+			openFenceGate(ctx.getPlayer(), level, blockPos, blockState, (FenceGateBlock)blockType);
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		}
 
-		IronDoorKeyMod.LOGGER.warn("Failed to open the block - " +
+		IronDoorKeyCommon.LOGGER.warn("Failed to open the block - " +
 				"it has \"openable\" tag, but isn't instance of DoorBlock, TrapDoorBlock or FenceGateBlock");
 		return InteractionResult.PASS;
 	}
@@ -74,7 +80,7 @@ public class IronDoorKeyItem extends Item
 		level.gameEvent(player, isOpen ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, blockPos);
 	}
 
-	private static void openFenceGate(@Nullable Player player, Level level, BlockPos blockPos, BlockState blockState)
+	private static void openFenceGate(@Nullable Player player, Level level, BlockPos blockPos, BlockState blockState, FenceGateBlock blockType)
 	{
 		boolean wasOpen = blockState.getValue(FenceGateBlock.OPEN);
 		if (wasOpen)
@@ -84,13 +90,43 @@ public class IronDoorKeyItem extends Item
 		}
 		else
 		{
-			Direction direction = player != null ? player.getDirection() : blockState.getValue(FenceGateBlock.FACING);
-			BlockState newBlockState = blockState.setValue(FenceGateBlock.OPEN, true).setValue(FenceGateBlock.FACING, direction);
+			BlockState newBlockState = blockState.setValue(FenceGateBlock.OPEN, true);
+			if (player != null && player.getDirection().getOpposite() == blockState.getValue(FenceGateBlock.FACING))
+			{
+				newBlockState = newBlockState.setValue(FenceGateBlock.FACING, player.getDirection());
+			}
 			level.setBlock(blockPos, newBlockState, 10);
 		}
 
 		boolean isOpen = !wasOpen;
-		level.levelEvent(player, isOpen ? 1008 : 1014, blockPos, 0);
+		playFenceGateSound(player, level, blockPos, blockType, isOpen);
 		level.gameEvent(player, isOpen ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, blockPos);
+	}
+
+	private static void playFenceGateSound(@Nullable Player player, Level level, BlockPos blockPos, FenceGateBlock blockType, boolean isOpen)
+	{
+		if (fenceGateTypeField == null)
+		{
+			if (fenceGateSoundUsed) { return; }
+			fenceGateSoundUsed = true;
+
+			for (Field field : FenceGateBlock.class.getDeclaredFields())
+			{
+				if (field.getType() == WoodType.class && !Modifier.isStatic(field.getModifiers()))
+				{
+					fenceGateTypeField = field;
+					field.setAccessible(true);
+					break;
+				}
+			}
+			if (fenceGateTypeField == null) { return; }
+		}
+
+		WoodType woodType;
+		try { woodType = (WoodType)fenceGateTypeField.get(blockType); }
+		catch (Exception exception) { return; }
+
+		level.playSound(player, blockPos, isOpen ? woodType.fenceGateOpen() : woodType.fenceGateClose(),
+				SoundSource.BLOCKS, 1.0f, level.getRandom().nextFloat() * 0.1f + 0.9f);
 	}
 }
