@@ -1,3 +1,8 @@
+===Version 1.2===
+-Fixed opening non-openable fence gates with Iron Door Key not emitting sound and rotating fence gate in any direction depending on player rotation.
+-Obtaining Redstone Dust now gives player Iron Door Key recipe.
+-Iron door key recipe is now properly placed in equipment category, instead of building.
+
 ===Version 1.1.1===
 -Version information is no longer sent to logs during startup.
 -Warning message for unopenable block being declared as openable now properly includes "FenceGateBlock" as class of blocks possible to open.
