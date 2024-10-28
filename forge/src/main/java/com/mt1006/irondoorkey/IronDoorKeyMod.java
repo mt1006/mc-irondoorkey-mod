@@ -1,0 +1,22 @@
+package com.mt1006.irondoorkey;
+
+import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+
+@Mod(IronDoorKeyCommon.MOD_ID)
+public class IronDoorKeyMod
+{
+	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, IronDoorKeyCommon.MOD_ID);
+	private static final RegistryObject<Item> ITEM_IRON_DOOR_KEY = ITEMS.register("iron_door_key", IronDoorKeyItem::new);
+
+	public IronDoorKeyMod()
+	{
+		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		ITEMS.register(eventBus);
+	}
+}
