@@ -1,4 +1,4 @@
-package com.mt1006.irondoorkey;
+package net.mt1006.irondoorkey;
 
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -10,13 +10,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-@Mod(IronDoorKeyCommon.MOD_ID)
-public class IronDoorKeyMod
+@Mod(IronDoorKeyMod.MOD_ID)
+public class IronDoorKeyForge
 {
-	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, IronDoorKeyCommon.MOD_ID);
+	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, IronDoorKeyMod.MOD_ID);
 	private static final RegistryObject<Item> ITEM_IRON_DOOR_KEY = ITEMS.register("iron_door_key", IronDoorKeyItem::new);
 
-	public IronDoorKeyMod(FMLJavaModLoadingContext context)
+	public IronDoorKeyForge(FMLJavaModLoadingContext context)
 	{
 		IEventBus eventBus = context.getModEventBus();
 		ITEMS.register(eventBus);
@@ -27,7 +27,7 @@ public class IronDoorKeyMod
 	{
 		if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES))
 		{
-			event.accept(IronDoorKeyMod.ITEM_IRON_DOOR_KEY);
+			event.accept(ITEM_IRON_DOOR_KEY);
 		}
 	}
 }
