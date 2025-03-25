@@ -1,3 +1,6 @@
+===Version 1.2.1===
+-Minor improvements.
+
 ===Version 1.2===
 -Fixed opening non-openable fence gates with Iron Door Key not emitting sound and rotating fence gate in any direction depending on player rotation.
 -Obtaining Redstone Dust now gives player Iron Door Key recipe.
