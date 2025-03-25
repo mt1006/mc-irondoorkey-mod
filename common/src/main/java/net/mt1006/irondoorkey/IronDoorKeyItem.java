@@ -1,4 +1,4 @@
-package com.mt1006.irondoorkey;
+package net.mt1006.irondoorkey;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
@@ -38,7 +38,7 @@ public class IronDoorKeyItem extends Item
 		BlockPos blockPos = ctx.getClickedPos();
 		BlockState blockState = level.getBlockState(blockPos);
 
-		if (!blockState.is(IronDoorKeyCommon.OPENABLE)) { return InteractionResult.PASS; }
+		if (!blockState.is(IronDoorKeyMod.OPENABLE)) { return InteractionResult.PASS; }
 		Block blockType = blockState.getBlock();
 
 		if (blockType instanceof DoorBlock)
@@ -59,7 +59,7 @@ public class IronDoorKeyItem extends Item
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		}
 
-		IronDoorKeyCommon.LOGGER.warn("Failed to open the block - " +
+		IronDoorKeyMod.LOGGER.warn("Failed to open the block - " +
 				"it has \"openable\" tag, but isn't instance of DoorBlock, TrapDoorBlock or FenceGateBlock");
 		return InteractionResult.PASS;
 	}

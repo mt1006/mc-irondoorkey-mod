@@ -19,7 +19,7 @@
 	"environment": "*",
 	"entrypoints":
 	{
-		"main": ["com.mt1006.irondoorkey.IronDoorKeyMod"]
+		"main": ["net.mt1006.irondoorkey.IronDoorKeyFabric"]
 	},
 
 	"depends":
