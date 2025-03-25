@@ -1,4 +1,4 @@
-package com.mt1006.irondoorkey;
+package net.mt1006.irondoorkey;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -27,7 +27,7 @@ import java.lang.reflect.Modifier;
 
 public class IronDoorKeyItem extends Item
 {
-	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(IronDoorKeyCommon.MOD_ID, "iron_door_key");
+	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(IronDoorKeyMod.MOD_ID, "iron_door_key");
 
 	private static boolean fenceGateSoundUsed = false;
 	private static @Nullable Field fenceGateTypeField = null;
@@ -43,7 +43,7 @@ public class IronDoorKeyItem extends Item
 		BlockPos blockPos = ctx.getClickedPos();
 		BlockState blockState = level.getBlockState(blockPos);
 
-		if (!blockState.is(IronDoorKeyCommon.OPENABLE)) { return InteractionResult.PASS; }
+		if (!blockState.is(IronDoorKeyMod.OPENABLE)) { return InteractionResult.PASS; }
 		Block blockType = blockState.getBlock();
 
 		if (blockType instanceof DoorBlock)
@@ -64,7 +64,7 @@ public class IronDoorKeyItem extends Item
 			return InteractionResult.SUCCESS;
 		}
 
-		IronDoorKeyCommon.LOGGER.warn("Failed to open the block - " +
+		IronDoorKeyMod.LOGGER.warn("Failed to open the block - " +
 				"it has \"openable\" tag, but isn't instance of DoorBlock, TrapDoorBlock or FenceGateBlock");
 		return InteractionResult.PASS;
 	}

@@ -1,4 +1,4 @@
-package com.mt1006.irondoorkey;
+package net.mt1006.irondoorkey;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -7,7 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 
-public class IronDoorKeyMod implements ModInitializer
+public class IronDoorKeyFabric implements ModInitializer
 {
 	private static final Item ITEM_IRON_DOOR_KEY = new IronDoorKeyItem();
 
