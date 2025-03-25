@@ -1,19 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key":
-  {
-    "#": "minecraft:iron_nugget",
-    "*": "minecraft:redstone"
-  },
-  "pattern": [
-    "#  ",
-    "*##",
-    "# #"
-  ],
-  "result":
-  {
-    "id": "irondoorkey:iron_door_key",
-    "count": 1
-  }
+	"type": "minecraft:crafting_shaped",
+	"category": "equipment",
+	"key":
+	{
+		"#": "minecraft:iron_nugget",
+		"*": "minecraft:redstone"
+	},
+	"pattern": [
+		"#  ",
+		"*##",
+		"# #"
+	],
+	"result":
+	{
+		"id": "irondoorkey:iron_door_key",
+		"count": 1
+	}
 }
