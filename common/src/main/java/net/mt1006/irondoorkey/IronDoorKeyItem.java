@@ -129,7 +129,7 @@ public class IronDoorKeyItem extends Item
 
 		WoodType woodType;
 		try { woodType = (WoodType)fenceGateTypeField.get(blockType); }
-		catch (Exception exception) { return; }
+		catch (Exception e) { return; }
 
 		level.playSound(player, blockPos, isOpen ? woodType.fenceGateOpen() : woodType.fenceGateClose(),
 				SoundSource.BLOCKS, 1.0f, level.getRandom().nextFloat() * 0.1f + 0.9f);
