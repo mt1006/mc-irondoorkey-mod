@@ -2,8 +2,8 @@ package net.mt1006.irondoorkey;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +27,7 @@ import java.lang.reflect.Modifier;
 
 public class IronDoorKeyItem extends Item
 {
-	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(IronDoorKeyMod.MOD_ID, "iron_door_key");
+	public static final Identifier ID = Identifier.fromNamespaceAndPath(IronDoorKeyMod.MOD_ID, "iron_door_key");
 
 	private static boolean fenceGateSoundUsed = false;
 	private static @Nullable Field fenceGateTypeField = null;
