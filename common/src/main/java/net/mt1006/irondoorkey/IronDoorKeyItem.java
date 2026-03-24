@@ -46,9 +46,8 @@ public class IronDoorKeyItem extends Item
 		if (!blockState.is(IronDoorKeyMod.OPENABLE)) { return InteractionResult.PASS; }
 		Block blockType = blockState.getBlock();
 
-		if (blockType instanceof DoorBlock)
+		if (blockType instanceof DoorBlock doorBlock)
 		{
-			DoorBlock doorBlock = (DoorBlock)blockType;
 			doorBlock.setOpen(ctx.getPlayer(), level, blockState, blockPos, !doorBlock.isOpen(blockState));
 			return InteractionResult.SUCCESS;
 		}
