@@ -1,3 +1,11 @@
+## THIS REPOSITORY HAS BEEN MOVED TO CODEBERG
+
+### New repository: https://codeberg.org/mt1006/mc-irondoorkey-mod
+
+### Issue tracker: https://codeberg.org/mt1006/mc-irondoorkey-mod/issues
+
+
+
 # About
 **Iron Door Key** is a Minecraft mod adding as its name suggests iron door key. It can be used to open iron doors and trapdoors.
 
